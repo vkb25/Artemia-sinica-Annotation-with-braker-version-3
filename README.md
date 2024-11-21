@@ -58,8 +58,21 @@ agat_convert_sp_gxf2gxf.pl -g braker.gff3 -o braker_agat.gff3
 agat_convert_sp_gff2gtf.pl --gff braker_agat.gff3 -o braker_agat.gtf
 ```
 
+in case you are interested in keeping only longest isoform in each gene, you can use this command line
+
+`agat_convert_sp_gff2gtf.pl --gff braker_agatiso.gff3 -o braker_agatiso.gtf`
+
+
 Then we get cds and aa of the annotation using getAnnoFastaFromJoingenes.py
 
+`python getAnnoFastaFromJoingenes.py -g Artemia_sinica_genome_29_12_2021.fa -f braker_agat.gtf -o braker_agat`
 
 Then we check for completeness using BUSCO as follows
 
+```
+module load anaconda3/2024.03_deb12
+source /path/activate_anaconda3_2024.03_deb12.txt
+conda activate busco
+```
+
+`busco --in braker_agat.aa -c 20 -l arthropoda -f --mode prot -o busco_brakagat`
