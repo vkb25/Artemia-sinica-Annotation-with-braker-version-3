@@ -13,15 +13,15 @@ module load RepeatMasker
 
 ```
 
-
+```
 BuildDatabase -name Artemia_sinica_genome_29_12_2021 -engine ncbi Artemia_sinica_genome_29_12_2021.fasta
 
 RepeatModeler -threads 10 -database Artemia_sinica_genome_29_12_2021
-
+```
 
 ###### We then annotate the repeats using the library databases created above
 
-RepeatMasker -pa 30 -lib Artemia_sinica_genome_29_12_2021_renamed-families.fa -xsmall Artemia_sinica_genome_29_12_2021.fa
+`RepeatMasker -pa 30 -lib Artemia_sinica_genome_29_12_2021_renamed-families.fa -xsmall Artemia_sinica_genome_29_12_2021.fa`
 
 
 ###### We then annotate the genome using both RNA-Seq and protein data following this pipeline described here[](https://github.com/Gaius-Augustus/BRAKER)
