@@ -39,7 +39,7 @@ cat arthropoda/Rawdata/* > proteins.fasta
 
 ```
 
-The pipeline ran as described here [](https://pmc.ncbi.nlm.nih.gov/articles/PMC10312602/) 
+The pipeline ran as described here[](https://pmc.ncbi.nlm.nih.gov/articles/PMC10312602/) 
 
 ![nihpp-2023 06 10 544449v4-f0001](https://github.com/user-attachments/assets/a2de2198-2acc-4ef7-940b-a812d14761fc)
 
