@@ -81,3 +81,18 @@ conda activate busco
 We can also check the statistics of the annotation using this
 
 `agat_sq_stat_basic.pl -i braker_agat.gff3 -g Artemia_sinica_genome_29_12_2021.fa -o braker_agat_statistics`
+
+
+output of annotation statistics
+
+```
+Type (3rd column)       Number  Size total (kb) Size mean (bp)  % of the genome /!\Results are rounding to two decimal places
+cds     86557   17398.50        201.01  1.02
+exon    86557   17398.50        201.01  1.02
+gene    12513   546127.83       43644.84        32.11
+intron  71122   750016.76       10545.50        44.09
+mrna    15435   767415.26       49719.16        45.11
+start_codon     15430   46.19   2.99    0.00
+stop_codon      15434   46.27   3.00    0.00
+Total   303048  2098449.31      6924.48 123.36
+```
