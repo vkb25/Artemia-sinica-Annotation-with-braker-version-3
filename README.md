@@ -108,7 +108,7 @@ stop_codon      15434   46.27   3.00    0.00
 Total   303048  2098449.31      6924.48 123.36
 ```
 
-# We also ran the annotation using only the genome and RNA sequencing data
+# We also ran the annotation using the soft-masked genome and RNA sequencing data
 
 The RNA sequencing data are the same as above but now using already downloaded
 
