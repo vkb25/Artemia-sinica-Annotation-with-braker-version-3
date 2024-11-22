@@ -76,3 +76,8 @@ conda activate busco
 ```
 
 `busco --in braker_agat.aa -c 20 -l arthropoda -f --mode prot -o busco_brakagat`
+
+
+We can also check the statistics of the annotation using this
+
+`agat_sq_stat_basic.pl -i braker_agat.gff3 -g Artemia_sinica_genome_29_12_2021.fa -o braker_agat_statistics`
