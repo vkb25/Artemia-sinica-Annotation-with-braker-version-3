@@ -83,7 +83,7 @@ The busco statistics of final braker gene prediction following Tsebra gene selec
 C:70.1%[S:54.6%,D:15.5%],F:9.7%,M:20.2%,n:1013
 ```
 
-However, the augustus gene prediction busco score is high
+However, the augustus gene prediction (input file for combined gene set step) busco score is high
 
 ```
 C:80.8%[S:73.1%,D:7.7%],F:9.9%,M:9.3%,n:1013
