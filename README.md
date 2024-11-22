@@ -77,6 +77,17 @@ conda activate busco
 
 `busco --in braker_agat.aa -c 20 -l arthropoda -f --mode prot -o busco_brakagat`
 
+The busco statistics of final braker gene prediction following Tsebra gene selection
+
+```
+C:70.1%[S:54.6%,D:15.5%],F:9.7%,M:20.2%,n:1013
+```
+
+However, the augustus gene prediction busco score is high
+
+```
+C:80.8%[S:73.1%,D:7.7%],F:9.9%,M:9.3%,n:1013
+```
 
 We can also check the statistics of the annotation using this
 
@@ -96,3 +107,13 @@ start_codon     15430   46.19   2.99    0.00
 stop_codon      15434   46.27   3.00    0.00
 Total   303048  2098449.31      6924.48 123.36
 ```
+
+# We also ran the annotation using only the genome and RNA sequencing data
+
+The RNA sequencing data are the same as above but now using already downloaded
+
+```
+braker.pl --species=ArtemiaSinicaannv4 --genome=Artemia_sinica_genome_29_12_2021.fa.masked --rnaseq_sets_ids=39869,39870,39871,39872,39877,39878,39879,39880,39895,39896,39897,39898,39899,39900,39901,39902,40767,40768,40769,40770,40771,40772,45052,45053 --rnaseq_sets_dir=/path/expression/ --CDBTOOLS_PATH=/path/cdbfasta/20230902/ --TSEBRA_PATH=/path/TSEBRA/bin/ --useexisting --gff3 --threads 30 --workingdir=/path/brakerv3_starmaskedrnd2
+```
+
+![braker1](https://github.com/user-attachments/assets/4ee7aaf0-9e42-4b3f-94d4-1ec8df2c8275)
