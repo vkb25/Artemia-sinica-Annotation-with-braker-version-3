@@ -82,17 +82,9 @@ The busco statistics of final braker gene prediction following Tsebra gene selec
 ```
 C:70.1%[S:54.6%,D:15.5%],F:9.7%,M:20.2%,n:1013
 ```
-
-However, the augustus gene prediction (input file for combined gene set step) busco score is high
-
-```
-C:80.8%[S:73.1%,D:7.7%],F:9.9%,M:9.3%,n:1013
-```
-
 We can also check the statistics of the annotation using this
 
 `agat_sq_stat_basic.pl -i braker_agat.gff3 -g Artemia_sinica_genome_29_12_2021.fa -o braker_agat_statistics`
-
 
 output of annotation statistics
 
@@ -108,7 +100,55 @@ stop_codon      15434   46.27   3.00    0.00
 Total   303048  2098449.31      6924.48 123.36
 ```
 
-# We also ran the annotation using the soft-masked genome and RNA sequencing data
+BRAKER produces several important output files in the working directory.
+
+    braker.gtf: Final gene set of BRAKER. This file may contain different contents depending on how you called BRAKER
+
+        in ETPmode: Final gene set of BRAKER consisting of genes predicted by AUGUSTUS and GeneMark-ETP that were combined and filtered by TSEBRA.
+
+        otherwise: Union of augustus.hints.gtf and reliable GeneMark-ES/ET/EP predictions (genes fully supported by external evidence). In --esmode, this is the union of augustus.ab_initio.gtf and all GeneMark-ES genes. Thus, this set is generally more sensitive (more genes correctly predicted) and can be less specific (more false-positive predictions can be present). *This output is not necessarily better than augustus.hints.gtf*, and it is not recommended to use it if BRAKER was run in ESmode.
+
+
+In this annotation, we find augustus.hints.gtf to be better than braker.gtf (the output of the combined and filtered by TSEBRA though we ran the braker in ETP mode) as shown by the high busco score relative to the final output. Therefore I will recommend to use augustus.hints.gtf since AUGUSTUS is trained on 'high-confindent' genes (genes with very high extrinsic evidence support) from the GeneMark-ETP prediction and a set of genes is predicted by AUGUSTUS. 
+
+First we filter those less than 100bp in ORF
+
+```agat_sp_filter_by_ORF_size.pl --gff augustus_hintsagat.gff3 -o augustus_hintsagatORF.gff3```
+
+then we filter out those with incomplete gene models 
+
+```agat_sp_filter_incomplete_gene_coding_models.pl --gff augustus_hintsagatORF3_sup100.gff --fasta Artemia_sinica_genome_29_12_2021.fa -o augustus_hintsagatORF3_sup100compgene.gff```
+
+Fix overlapping genes if any
+
+```agat_sp_fix_overlaping_genes.pl -f augustus_hintsagatORF3_sup100compgene.gff -o augustus_hintsagatORF3_sup100compgenefix.gff3
+Parse file augustus_hintsagatORF3_sup100compgene.gff```
+
+statistics of the annotation
+
+```
+Type (3rd column)       Number  Size total (kb) Size mean (bp)  % of the genome /!\Results are rounding to two decimal places
+cds     121633  28650.80        235.55  1.68
+exon    121633  28999.84        238.42  1.70
+five_prime_utr  9       299.24  33249.22        0.02
+gene    24664   915488.32       37118.40        53.82
+intron  94849   1059071.07      11165.86        62.26
+mrna    26798   1087721.87      40589.67        63.95
+start_codon     26788   80.36   3.00    0.00
+stop_codon      26793   80.38   3.00    0.00
+three_prime_utr 5       49.80   9960.20 0.00
+Total   443172  3120441.69      7041.15 183.44
+```
+
+
+
+
+```
+C:80.4%[S:72.7%,D:7.7%],F:9.5%,M:10.1%,n:1013
+```
+
+
+# We are now running the annotation using the soft-masked genome and RNA sequencing data and compare the output. 
 
 The RNA sequencing data are the same as above but now using already downloaded
 
