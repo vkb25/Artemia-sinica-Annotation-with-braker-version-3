@@ -100,13 +100,13 @@ stop_codon      15434   46.27   3.00    0.00
 Total   303048  2098449.31      6924.48 123.36
 ```
 
+
 BRAKER produces several important output files in the working directory.
 
-    braker.gtf: Final gene set of BRAKER. This file may contain different contents depending on how you called BRAKER
-
-        in ETPmode: Final gene set of BRAKER consisting of genes predicted by AUGUSTUS and GeneMark-ETP that were combined and filtered by TSEBRA.
-
-        otherwise: Union of augustus.hints.gtf and reliable GeneMark-ES/ET/EP predictions (genes fully supported by external evidence). In --esmode, this is the union of augustus.ab_initio.gtf and all GeneMark-ES genes. Thus, this set is generally more sensitive (more genes correctly predicted) and can be less specific (more false-positive predictions can be present). *This output is not necessarily better than augustus.hints.gtf*, and it is not recommended to use it if BRAKER was run in ESmode.
+braker.gtf: Final gene set of BRAKER. This file may contain different contents depending on how you called BRAKER in ETPmode: 
+    Final gene set of BRAKER consisting of genes predicted by AUGUSTUS and GeneMark-ETP that were combined and filtered by TSEBRA.
+    otherwise: Union of augustus.hints.gtf and reliable GeneMark-ES/ET/EP predictions (genes fully supported by external evidence). 
+In --esmode, this is the union of augustus.ab_initio.gtf and all GeneMark-ES genes. Thus, this set is generally more sensitive (more genes correctly predicted) and can be less specific (more false-positive predictions can be present). *This output is not necessarily better than augustus.hints.gtf*, and it is not recommended to use it if BRAKER was run in ESmode.
 
 
 In this annotation, we find augustus.hints.gtf to be better than braker.gtf (the output of the combined and filtered by TSEBRA though we ran the braker in ETP mode) as shown by the high busco score relative to the final output. Therefore I will recommend to use augustus.hints.gtf since AUGUSTUS is trained on 'high-confindent' genes (genes with very high extrinsic evidence support) from the GeneMark-ETP prediction and a set of genes is predicted by AUGUSTUS. 
