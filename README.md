@@ -113,16 +113,16 @@ In this annotation, we find augustus.hints.gtf to be better than braker.gtf (the
 
 First we filter those less than 100bp in ORF
 
-```agat_sp_filter_by_ORF_size.pl --gff augustus_hintsagat.gff3 -o augustus_hintsagatORF.gff3```
+`agat_sp_filter_by_ORF_size.pl --gff augustus_hintsagat.gff3 -o augustus_hintsagatORF.gff3`
 
 then we filter out those with incomplete gene models 
 
-```agat_sp_filter_incomplete_gene_coding_models.pl --gff augustus_hintsagatORF3_sup100.gff --fasta Artemia_sinica_genome_29_12_2021.fa -o augustus_hintsagatORF3_sup100compgene.gff```
+`agat_sp_filter_incomplete_gene_coding_models.pl --gff augustus_hintsagatORF3_sup100.gff --fasta Artemia_sinica_genome_29_12_2021.fa -o augustus_hintsagatORF3_sup100compgene.gff`
 
 Fix overlapping genes if any
 
-```agat_sp_fix_overlaping_genes.pl -f augustus_hintsagatORF3_sup100compgene.gff -o augustus_hintsagatORF3_sup100compgenefix.gff3
-Parse file augustus_hintsagatORF3_sup100compgene.gff```
+`agat_sp_fix_overlaping_genes.pl -f augustus_hintsagatORF3_sup100compgene.gff -o augustus_hintsagatORF3_sup100compgenefix.gff3
+Parse file augustus_hintsagatORF3_sup100compgene.gff`
 
 statistics of the annotation
 
