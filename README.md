@@ -194,3 +194,7 @@ three_prime_utr 5       47.10   9421.00 0.00
 Total   476188  2697800.15      5665.41 158.60
 ```
 
+#### The busco score for the final annotation output
+
+`C:79.3%[S:67.8%,D:11.5%],F:10.3%,M:10.4%,n:1013`
+
