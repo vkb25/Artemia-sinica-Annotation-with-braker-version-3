@@ -121,8 +121,7 @@ then we filter out those with incomplete gene models
 
 Fix overlapping genes if any
 
-`agat_sp_fix_overlaping_genes.pl -f augustus_hintsagatORF3_sup100compgene.gff -o augustus_hintsagatORF3_sup100compgenefix.gff3
-Parse file augustus_hintsagatORF3_sup100compgene.gff`
+`agat_sp_fix_overlaping_genes.pl -f augustus_hintsagatORF3_sup100compgene.gff -o augustus_hintsagatORF3_sup100compgenefix.gff3`
 
 statistics of the annotation
 
@@ -150,10 +149,48 @@ C:80.4%[S:72.7%,D:7.7%],F:9.5%,M:10.1%,n:1013
 
 # We are now running the annotation using the soft-masked genome and RNA sequencing data and compare the output. 
 
-The RNA sequencing data are the same as above but now using already downloaded
-
 ```
-braker.pl --species=ArtemiaSinicaannv4 --genome=Artemia_sinica_genome_29_12_2021.fa.masked --rnaseq_sets_ids=39869,39870,39871,39872,39877,39878,39879,39880,39895,39896,39897,39898,39899,39900,39901,39902,40767,40768,40769,40770,40771,40772,45052,45053 --rnaseq_sets_dir=/path/expression/ --CDBTOOLS_PATH=/path/cdbfasta/20230902/ --TSEBRA_PATH=/path/TSEBRA/bin/ --useexisting --gff3 --threads 30 --workingdir=/path/brakerv3_starmaskedrnd2
+braker.pl --species=ArtemiaSinicaannexp --genome=Artemia_sinica_genome_29_12_2021.fa.masked --rnaseq_sets_ids=SRR15446616,SRR15446637,SRR15446638,SRR15446639,SRR15446642,SRR15446651,SRR15446664,SRR15446667,SRR15446668,SRR15446669,SRR15446670,SRR15446671,SRR15446672,SRR15446673,SRR15446674,SRR15446675,SRR15446676,SRR15446677,SRR15446678,SRR15446679,SRR15446680,SRR15446681,SRR15446682,SRR15446683 --CDBTOOLS_PATH=/path/cdbfasta/20230902/ --TSEBRA_PATH=/path/TSEBRA/bin/ --useexisting --gff3 --threads 20 --workingdir=/path/brakerv3_starmaskedexp
 ```
 
 ![braker1](https://github.com/user-attachments/assets/4ee7aaf0-9e42-4b3f-94d4-1ec8df2c8275)
+
+Refining the annotation output
+
+`agat_convert_sp_gxf2gxf.pl -g braker.gff3 -o braker_agat.gff3`
+
+First we filter those less than 100bp in ORF
+
+`agat_sp_filter_by_ORF_size.pl --gff braker_agat.gff3 -o braker_agatORF.gff3`
+
+
+then we filter out those with incomplete gene models 
+
+`agat_sp_filter_incomplete_gene_coding_models.pl --gff braker_agatORF3_sup100.gff --fasta Artemia_sinica_genome_29_12_2021.fa -o braker_agatORF3_sup100compgene.gff`
+
+
+fix overlapping genes if any
+
+`agat_sp_fix_overlaping_genes.pl -f braker_agatORF3_sup100compgene.gff -o braker_agatORF3_sup100compgenefix.gff3`
+
+Get getAnnoFasta From Joingenes
+
+`python getAnnoFastaFromJoingenes.py -g Artemia_sinica_genome_29_12_2021.fa -f braker_agatORF3_sup100compgenefix.gtf -o braker_agatORF3_sup100compgenefix`
+
+
+annotation statistics
+
+```
+Type (3rd column)       Number  Size total (kb) Size mean (bp)  % of the genome /!\Results are rounding to two decimal places
+cds     130595  30069.42        230.25  1.77
+exon    130595  30218.09        231.39  1.78
+five_prime_utr  13      101.57  7813.31 0.01
+gene    25035   763676.41       30504.35        44.90
+intron  100938  921720.07       9131.55 54.19
+mrna    29675   951789.48       32073.78        55.95
+start_codon     29662   88.99   3.00    0.01
+stop_codon      29670   89.01   3.00    0.01
+three_prime_utr 5       47.10   9421.00 0.00
+Total   476188  2697800.15      5665.41 158.60
+```
+
