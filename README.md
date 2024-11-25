@@ -109,7 +109,7 @@ braker.gtf: Final gene set of BRAKER. This file may contain different contents d
 In --esmode, this is the union of augustus.ab_initio.gtf and all GeneMark-ES genes. Thus, this set is generally more sensitive (more genes correctly predicted) and can be less specific (more false-positive predictions can be present). *This output is not necessarily better than augustus.hints.gtf*, and it is not recommended to use it if BRAKER was run in ESmode.
 
 
-In this annotation, we find augustus.hints.gtf to be better than braker.gtf (the output of the combined and filtered by TSEBRA though we ran the braker in ETP mode) as shown by the high busco score relative to the final output. Therefore I will recommend to use augustus.hints.gtf since AUGUSTUS is trained on 'high-confindent' genes (genes with very high extrinsic evidence support) from the GeneMark-ETP prediction and a set of genes is predicted by AUGUSTUS. 
+In this annotation, we find augustus.hints.gtf to be better than braker.gtf (the output of the combined and filtered by TSEBRA though we ran the braker in ETP mode) as shown by the high busco score relative to the final output. One can also use augustus.hints.gtf since AUGUSTUS is trained on 'high-confindent' genes (genes with very high extrinsic evidence support) from the GeneMark-ETP prediction and a set of genes is predicted by AUGUSTUS. 
 
 First we filter those less than 100bp in ORF
 
@@ -147,7 +147,7 @@ C:80.4%[S:72.7%,D:7.7%],F:9.5%,M:10.1%,n:1013
 ```
 
 
-# We are now running the annotation using the soft-masked genome and RNA sequencing data and compare the output. 
+# We ran the annotation using the soft-masked genome and RNA sequencing data and compare the output. 
 
 ```
 braker.pl --species=ArtemiaSinicaannexp --genome=Artemia_sinica_genome_29_12_2021.fa.masked --rnaseq_sets_ids=SRR15446616,SRR15446637,SRR15446638,SRR15446639,SRR15446642,SRR15446651,SRR15446664,SRR15446667,SRR15446668,SRR15446669,SRR15446670,SRR15446671,SRR15446672,SRR15446673,SRR15446674,SRR15446675,SRR15446676,SRR15446677,SRR15446678,SRR15446679,SRR15446680,SRR15446681,SRR15446682,SRR15446683 --CDBTOOLS_PATH=/path/cdbfasta/20230902/ --TSEBRA_PATH=/path/TSEBRA/bin/ --useexisting --gff3 --threads 20 --workingdir=/path/brakerv3_starmaskedexp
